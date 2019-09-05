@@ -1,5 +1,6 @@
 #!/usr/bin/env php
 <?php
+
 /**
  * Return the matching argument name, or false on failure.
  *
@@ -15,8 +16,10 @@ function argument(array $arguments, $name)
             return $items[1];
         }
     }
+
     return false;
 }
+
 /**
  * Return a valid length, setting the default if required.
  *
@@ -28,8 +31,10 @@ function length($length)
     if (0 === $length) {
         $length = 12;
     }
+
     return $length;
 }
+
 /**
  * Return a character list based on a mapping key.
  *
@@ -55,6 +60,7 @@ function characterMapping($key)
             return 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~';
     }
 }
+
 /**
  * Generate a password string.
  *
@@ -66,14 +72,19 @@ function generatePassword($characters, $length)
 {
     $password = [];
     $charactersLength = strlen($characters) - 1;
+
     for ($i = 0; $i < $length; $i++) {
         $key = rand(0, $charactersLength);
         $password[] = $characters[$key];
     }
+
     return implode($password);
 }
+
 $length = (int)argument($argv, 'length');
 $length = length($length);
+
 $charactersMappingKey = argument($argv, 'chars');
 $characters = characterMapping($charactersMappingKey);
+
 echo generatePassword($characters, $length) . PHP_EOL;
